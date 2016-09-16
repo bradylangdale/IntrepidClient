@@ -1,5 +1,5 @@
-# Abendigo
-A free as in both freedom and free beer game modding/hacking platform using Kotlin on the JVM.
+# IntrepidClient
+A modified Abendigo client built for user convience.
 
 [![Build Status](https://travis-ci.org/Jire/Abendigo.svg?branch=master)](https://travis-ci.org/Jire/Abendigo)
 [![Dependency Status](https://www.versioneye.com/user/projects/5784c44276ef40003fba815c/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5784c44276ef40003fba815c)
@@ -7,26 +7,21 @@ A free as in both freedom and free beer game modding/hacking platform using Kotl
 
 ---
 
-The project was originally started as a closed-source cheat and everything was done in-house. We since decided to move the project on to a new vision: a free and open-source modding platform.
-
-Initially there will be a focus on CS:GO because it was our original game target. In the future other games may be supported.
+This client contains more plugins featuring both rage and legit sytles.
 
 ## Dependencies
 
-We use some really cool technology to drive Abendigo. Here's a list:
+Based on Abengido:
 
-- [Arrowhead](https://github.com/Jire/Arrowhead) for our high-level interfacing with processes
+- [Abendigo](https://github.com/Jire/Abendigo) The actual client for which IntrepidClient is made
+- [Arrowhead](https://github.com/Jire/Arrowhead) for high-level interfacing with processes
 - [Java Native Access (JNA)](https://github.com/java-native-access/jna) as the backbone for interfacing with native libraries
-- [Netty](http://netty.io) for our controller server's networking
+- [Netty](http://netty.io) for Abendigo's networking
 
 ## Building from source
 
-You can watch this video guide to show you how to build from source.
+To run IntrepidClient first run "Build-Rebuild.bat", this compiles the client. Once both the hacks themselves and the menu are complete you run use the hacks by starting CS:GO and running "Launcher.bat".
 
-[![View on YouTube](http://i.imgur.com/fzn2l86.png)](https://www.youtube.com/watch?v=0jd0fDMDjxw)
+## Issues? Add me on steam!
 
-## Official controller client
-
-You can find our official controller client here: https://github.com/Jire/Abendigo-Controller
-
-Our controller protocol is very simple, you can also easily make your own controller.
+[Intrepidus](http://steamcommunity.com/id/intrepidus_zen) I'll be glad to help with any issues.
