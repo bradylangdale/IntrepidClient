@@ -24,4 +24,4 @@ To run IntrepidClient first run "Build-Rebuild.bat", this compiles the client. O
 
 ## Issues? Add me on steam!
 
-[Intrepidus](http://steamcommunity.com/id/intrepidus_zen) I'll be glad to help with any issues.
+[Intrepidus:](http://steamcommunity.com/id/intrepidus_zen) I'll be glad to help with any issues.
