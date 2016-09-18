@@ -18,8 +18,8 @@ object AutoAimPlugin : InGamePlugin(name = "Auto Aim", duration = 2) {
 
 	private const val AIM_KEY = 1 /* left click */
 
-	private const val LOCK_FOV = 9999999
-	private const val UNLOCK_FOV = LOCK_FOV * 2
+	private const val LOCK_FOV = 360
+	private const val UNLOCK_FOV = 360
 
 	private const val JUMP_REDUCTION = 0
 
