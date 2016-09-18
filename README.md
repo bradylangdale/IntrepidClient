@@ -13,14 +13,14 @@ This client contains more plugins featuring both rage and legit sytles.
 
 Based on Abengido:
 
-- [Abendigo](https://github.com/Jire/Abendigo) The actual client for which IntrepidClient is made
+- [Abendigo](https://github.com/Jire/Abendigo) The actual client from which IntrepidClient is made
 - [Arrowhead](https://github.com/Jire/Arrowhead) for high-level interfacing with processes
 - [Java Native Access (JNA)](https://github.com/java-native-access/jna) as the backbone for interfacing with native libraries
 - [Netty](http://netty.io) for Abendigo's networking
 
 ## Building from source
 
-To run IntrepidClient first run "Build-Rebuild.bat", this compiles the client. Once both the hacks themselves and the menu are complete you run use the hacks by starting CS:GO and running "Launcher.bat".
+To run IntrepidClient first run "Build-Rebuild.bat", this compiles the client. Once both the hacks themselves and the menu are complete you can then run the hacks by starting CS:GO and running "Launcher.bat".
 
 ## Issues? Add me on steam!
 
