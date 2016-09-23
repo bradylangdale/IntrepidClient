@@ -20,7 +20,7 @@ Based on Abengido:
 
 ## Building from source
 
-To run IntrepidClient first run "Build-Rebuild.bat", this compiles the client. Once both the hacks themselves and the menu are complete you can then run the hacks by starting CS:GO and running "Launcher.bat".
+To run IntrepidClient first run "run.bat" in each file, this compiles the client. Once both the hacks themselves and the menu are complete you can then run the hacks by starting CS:GO and run "abendigo.bat" as admin which is in "./IntrepidClient/build/install/abendigo/bin/" then run "abendigo-controller.bat" which is in "./IntrepidClient-menu/build/install/abendigo-controller/bin/".
 
 ## Issues? Add me on steam!
 
