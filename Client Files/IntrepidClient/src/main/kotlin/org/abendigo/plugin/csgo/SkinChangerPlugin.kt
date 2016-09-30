@@ -60,7 +60,8 @@ object SkinChangerPlugin : InGamePlugin("Skin Changer", duration = 1) {
 		Weapons.UMP45(556)
 		Weapons.USP_SILENCER(339, 0, 2679)
 		Weapons.XM1014(393)
-		Weapons.KNIFE_BAYONET(38)
+		Weapons.KNIFE_T(38)
+		Weapons.KNIFE(38)
 	}
 
 	override fun cycle() {

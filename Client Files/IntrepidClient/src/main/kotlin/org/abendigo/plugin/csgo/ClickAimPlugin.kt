@@ -18,7 +18,7 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
 
 	private const val AIM_KEY = 1
 
-	private const val LOCK_FOV = 40
+	private const val LOCK_FOV = 30
 	private const val UNLOCK_FOV = LOCK_FOV * 2
 	private const val NEVER_STICK = false
 
@@ -40,7 +40,7 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
 		
 		try {
 			val weapon = (+Me().weapon).type!!
-			if (weapon.knife) return
+			if (weapon.knife || weapon.grenade) return
 		} catch (t: Throwable) {
 			if (DEBUG) t.printStackTrace()
 		}
@@ -61,14 +61,14 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
 
 	private fun newTargetBone() = TARGET_BONES[random(TARGET_BONES.size)]
 
-	private fun findTarget(position: Vector<Float>, angle: Vector<Float>, lockFOV: Float): Boolean {
+	private fun findTarget(position: Vector, angle: Vector, lockFOV: Float): Boolean {
 		var closestDelta = Int.MAX_VALUE
 		var closetPlayer: Player? = null
 		for ((i, e) in enemies) {
 			if (+Me().dead) return false
 			if (+e.dead || !+e.spotted || +e.dormant) continue
 
-			val ePos = e.bonePosition(Bones.HEAD.id)
+			val ePos = e!!.bonePosition(Bones.HEAD.id)
 			val distance = distance(position, ePos)
 
 			calculateAngle(Me(), position, ePos, aim.reset())
@@ -91,13 +91,13 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
 		return false
 	}
 
-	private fun aimAt(position: Vector<Float>, angle: Vector<Float>, target: Player, unlockFOV: Float) {
+	private fun aimAt(position: Vector, angle: Vector, target: Player, unlockFOV: Float) {
 	
-		val enemyPosition = target.bonePosition(targetBone.id)
+		val enemyPosition = target!!.bonePosition(targetBone.id)
 
 		val smoothing = 100F
 
-		compensateVelocity(Me(), target, enemyPosition, smoothing)
+		compensateVelocity(Me(), target!!, enemyPosition, smoothing)
 
 		calculateAngle(Me(), position, enemyPosition, aim.reset())
 		normalizeAngle(aim)
@@ -110,5 +110,6 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
 
 		if (deltaFOV >= unlockFOV) ClickAimPlugin.target = null
 		else angleSmooth(aim, angle, smoothing)
+		ClickAimPlugin.target = null
 	}
 }

@@ -6,7 +6,7 @@ import org.abendigo.csgo.Client.glowObjectCount
 import org.abendigo.csgo.offsets.m_bDormant
 import org.jire.arrowhead.get
 
-object WallsLegitPlugin : InGamePlugin("Walls Legit", duration = 64) {
+object WallsLegitPlugin : InGamePlugin("Walls Legit", duration = 4) {
 
 	override val author = "Jire"
 	override val description = "Outlines players with a glow"

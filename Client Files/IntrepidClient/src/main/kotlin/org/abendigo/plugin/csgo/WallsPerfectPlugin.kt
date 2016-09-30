@@ -6,7 +6,7 @@ import org.abendigo.csgo.Client.glowObjectCount
 import org.abendigo.csgo.offsets.m_bDormant
 import org.jire.arrowhead.get
 
-object WallsPerfectPlugin : InGamePlugin("Walls Full", duration = 64) {
+object WallsPerfectPlugin : InGamePlugin("Walls Full", duration = 4) {
 
 	override val author = "Jire"
 	override val description = "Outlines players with a glow"
@@ -97,7 +97,7 @@ object WallsPerfectPlugin : InGamePlugin("Walls Full", duration = 64) {
 		csgo[glowAddress + 0x26] = fullBloom
 	}
 
-	private fun modelColors(entityAddress: Int, red: Byte, green: Byte, blue: Byte, alpha: Byte = 255.toByte()) {
+	private fun modelColors(entityAddress: Int, red: Byte, green: Byte, blue: Byte) {
 		csgo[entityAddress + 0x70] = red
 		csgo[entityAddress + 0x71] = green
 		csgo[entityAddress + 0x72] = blue

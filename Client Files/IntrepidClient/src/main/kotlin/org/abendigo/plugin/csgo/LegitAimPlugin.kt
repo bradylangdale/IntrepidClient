@@ -23,14 +23,14 @@ object LegitAimPlugin : InGamePlugin(name = "Aim Assist Legit", duration = 25) {
 
 	private const val LOCK_FOV = 35
 	private const val UNLOCK_FOV = LOCK_FOV * 2
-	private const val NEVER_STICK = false
+	private const val NEVER_STICK = true
 
 	private const val SMOOTHING_MIN = 10F
 	private const val SMOOTHING_MAX = 13F
 
 	private const val JUMP_REDUCTION = 0.4F
 
-	private val TARGET_BONES = arrayOf(Bones.HEAD, Bones.UPPER_CHEST, Bones.HEAD, Bones.NECK)
+	private val TARGET_BONES = arrayOf(Bones.HEAD, Bones.UPPER_CHEST, Bones.LOWER_CHEST)
 	private const val CHANGE_BONE_CHANCE = 7
 
 	private var target: Player? = null
@@ -47,7 +47,7 @@ object LegitAimPlugin : InGamePlugin(name = "Aim Assist Legit", duration = 25) {
 
 		try {
 			val weapon = (+Me().weapon).type!!
-			if (weapon.knife) return
+			if (weapon.knife || weapon.grenade) return
 		} catch (t: Throwable) {
 			if (DEBUG) t.printStackTrace()
 		}
@@ -70,7 +70,7 @@ object LegitAimPlugin : InGamePlugin(name = "Aim Assist Legit", duration = 25) {
 
 	private fun newTargetBone() = TARGET_BONES[random(TARGET_BONES.size)]
 
-	private fun findTarget(position: Vector<Float>, angle: Vector<Float>, lockFOV: Float): Boolean {
+	private fun findTarget(position: Vector, angle: Vector, lockFOV: Float): Boolean {
 		var closestDelta = Int.MAX_VALUE
 		var closetPlayer: Player? = null
 		for ((i, e) in enemies) {
@@ -100,7 +100,7 @@ object LegitAimPlugin : InGamePlugin(name = "Aim Assist Legit", duration = 25) {
 		return false
 	}
 
-	private fun aimAt(position: Vector<Float>, angle: Vector<Float>, target: Player, unlockFOV: Float) {
+	private fun aimAt(position: Vector, angle: Vector, target: Player, unlockFOV: Float) {
 		var smoothingMin = SMOOTHING_MIN * FORCE_AIM_ENHANCEMENT
 		var smoothingMax = SMOOTHING_MAX * FORCE_AIM_ENHANCEMENT
 		if (+target.flags and 1 == 0 || +Me().flags and 1 == 0) {
@@ -110,11 +110,11 @@ object LegitAimPlugin : InGamePlugin(name = "Aim Assist Legit", duration = 25) {
 
 		if (random(CHANGE_BONE_CHANCE) == 1) targetBone = newTargetBone()
 
-		val enemyPosition = target.bonePosition(targetBone.id)
+		val enemyPosition = target!!.bonePosition(targetBone.id)
 
-		val smoothing = 1.4f*12
+		val smoothing = 10f
 
-		compensateVelocity(Me(), target, enemyPosition, smoothing)
+		compensateVelocity(Me(), target!!, enemyPosition, smoothing)
 
 		calculateAngle(Me(), position, enemyPosition, aim.reset())
 		normalizeAngle(aim)
