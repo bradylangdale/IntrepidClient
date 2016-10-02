@@ -11,7 +11,7 @@ import org.jire.arrowhead.keyPressed
 import org.jire.arrowhead.keyReleased
 import java.lang.Math.abs
 
-object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
+object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 16) {
 
 	override val author = "Intrepidus/Jire"
 	override val description = "Aims at enemies and fucks them up"
@@ -20,20 +20,13 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
 
 	private const val LOCK_FOV = 30
 	private const val UNLOCK_FOV = LOCK_FOV * 2
-	private const val NEVER_STICK = false
-
-	private val TARGET_BONES = arrayOf(Bones.HEAD)
-	private const val CHANGE_BONE_CHANCE = 0
 
 	private var target: Player? = null
-	private var targetBone = newTargetBone()
 
 	private val aim = Vector(0F, 0F, 0F)
 
-	override fun cycle() {
-		val forceAim = false
-		
-		if (!forceAim && keyReleased(AIM_KEY)) return
+	override fun cycle() {	
+		if (keyReleased(AIM_KEY)) return
 
 		val lockFOV = LOCK_FOV * 100f
 		val unlockFOV = UNLOCK_FOV * 100f
@@ -59,14 +52,12 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
 	
 	}
 
-	private fun newTargetBone() = TARGET_BONES[random(TARGET_BONES.size)]
-
 	private fun findTarget(position: Vector, angle: Vector, lockFOV: Float): Boolean {
 		var closestDelta = Int.MAX_VALUE
 		var closetPlayer: Player? = null
 		for ((i, e) in enemies) {
 			if (+Me().dead) return false
-			if (+e.dead || !+e.spotted || +e.dormant) continue
+			if (!+e.dead) continue
 
 			val ePos = e.bonePosition(Bones.HEAD.id)
 			val distance = distance(position, ePos)
@@ -93,11 +84,9 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
 
 	private fun aimAt(position: Vector, angle: Vector, target: Player, unlockFOV: Float) {
 	
-		val enemyPosition = target.bonePosition(targetBone.id)
+		val enemyPosition = target.bonePosition(Bones.HEAD.id)
 
-		val smoothing = 100F
-
-		compensateVelocity(Me(), target, enemyPosition, smoothing)
+		compensateVelocityRage(Me(), target, enemyPosition)
 
 		calculateAngle(Me(), position, enemyPosition, aim.reset())
 		normalizeAngle(aim)
@@ -109,7 +98,7 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
 		val deltaFOV = abs(Math.sin(Math.toRadians(yawDelta.toDouble())) * distance)
 
 		if (deltaFOV >= unlockFOV) ClickAimPlugin.target = null
-		else angleSmooth(aim, angle, smoothing)
+		else angleInstant(aim, angle)
 		ClickAimPlugin.target = null
 	}
 }

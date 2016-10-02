@@ -10,8 +10,9 @@ import java.util.HashMap
 import kotlin.collections.MutableMap
 import kotlin.collections.Set
 import kotlin.collections.MutableSet
+import org.abendigo.plugin.sleep
 
-object AutoAimPlugin : InGamePlugin(name = "Auto Aim", duration = 16) {	
+object AutoAimPlugin : InGamePlugin(name = "Auto Aim", duration = 8) {	
 
 	override val author = "Intrepidus"
 	override val description = "If Neo Hacked He'd Use This"
@@ -56,6 +57,8 @@ object AutoAimPlugin : InGamePlugin(name = "Auto Aim", duration = 16) {
 				
 			if (+tar.spotted)
 			{
+				aimAt(position, angle, tar)
+				sleep(2)
 				break
 			}
 		}
@@ -69,20 +72,32 @@ object AutoAimPlugin : InGamePlugin(name = "Auto Aim", duration = 16) {
 	{
 		return Math.sqrt((((p1.x*p1.x)+(p2.x*p2.x))+((p1.y*p1.y)+(p2.y*p2.y))+((p1.z*p1.z)+(p2.z*p2.z))).toDouble())
 	}
+	
+	private fun aimSilent(position: Vector, angle: Vector, target: Player) {
+
+		val enemyPosition = target.bonePosition(Bones.HEAD.id)
+
+		compensateVelocityRage(Me(), target, enemyPosition)
+
+		calculateAngleRage(Me(), position, enemyPosition, aim.reset())
+		normalizeAngle(aim)
+
+		normalizeAngle(angle)
+
+		angleInstantSilent(aim, angle)
+	}
 
 	private fun aimAt(position: Vector, angle: Vector, target: Player) {
 
 		val enemyPosition = target.bonePosition(Bones.HEAD.id)
 
-		val smoothing = 80F
+		compensateVelocityRage(Me(), target, enemyPosition)
 
-		compensateVelocity(Me(), target, enemyPosition, smoothing)
-
-		calculateAngle(Me(), position, enemyPosition, aim.reset())
+		calculateAngleRage(Me(), position, enemyPosition, aim.reset())
 		normalizeAngle(aim)
 
 		normalizeAngle(angle)
 
-		angleSmooth(aim, angle, smoothing)
+		angleInstant(aim, angle)
 	}
 }

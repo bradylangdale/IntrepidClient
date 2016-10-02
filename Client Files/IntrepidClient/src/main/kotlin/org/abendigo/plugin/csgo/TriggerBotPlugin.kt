@@ -2,12 +2,12 @@ package org.abendigo.plugin.csgo
 
 import org.abendigo.DEBUG
 import org.abendigo.csgo.*
+import org.abendigo.csgo.offsets.m_dwForceAttack
 import org.abendigo.csgo.Client.clientDLL
 import org.abendigo.csgo.Client.enemies
-import org.abendigo.csgo.offsets.m_dwForceAttack
 import org.abendigo.plugin.sleep
 
-object TriggerBotPlugin : InGamePlugin("Trigger Bot", duration = 2) {
+object TriggerBotPlugin : InGamePlugin("Trigger Bot", duration = 1) {
 
 	override fun cycle() {
 		

@@ -45,6 +45,20 @@ fun compensateVelocity(source: Player, target: Entity, enemyPos: Vector, smoothi
 	return enemyPos
 }
 
+fun compensateVelocityRage(source: Player, target: Entity, enemyPos: Vector): Vector {
+	val myVelocity = +source.velocity
+	val enemyVelocity = +target.velocity
+	
+	enemyPos.x += enemyVelocity.x / 100
+	enemyPos.y += enemyVelocity.y / 100
+	enemyPos.z += enemyVelocity.z / 100
+	enemyPos.x -= myVelocity.x / 100
+	enemyPos.y -= myVelocity.y / 100
+	enemyPos.z -= myVelocity.z / 100
+
+	return enemyPos
+}
+
 fun angleSmooth(dest: Vector, orig: Vector, smoothing: Float) {
 	dest.x -= orig.x
 	dest.y -= orig.y
@@ -57,6 +71,56 @@ fun angleSmooth(dest: Vector, orig: Vector, smoothing: Float) {
 	normalizeAngle(dest)
 
 	clientState(1024).angle(dest, orig)
+}
+
+fun angleInstant(dest: Vector, orig: Vector)
+{
+	dest.x -= orig.x
+	dest.y -= orig.y
+	dest.z = 0F
+	normalizeAngle(dest)
+
+	dest.x = orig.x + dest.x
+	dest.y = orig.y + dest.y
+
+	normalizeAngle(dest)
+
+	clientState(1024).angle(dest, orig)
+}
+
+fun angleInstantSilent(dest: Vector, orig: Vector)
+{
+	dest.x -= orig.x
+	dest.y -= orig.y
+	dest.z = 0F
+	normalizeAngle(dest)
+
+	dest.x = orig.x + dest.x
+	dest.y = orig.y + dest.y
+
+	normalizeAngle(dest)
+
+	clientState(1024).silentAngle(dest, orig)
+}
+
+fun calculateAngleRage(player: Player, src: Vector, dst: Vector, angles: Vector): Vector {
+	val pitchReduction = PITCH_MAX_PUNCH
+	val yawReduction = YAW_MAX_PUNCH
+
+	val myPunch = +player.punch
+
+	val dX = src.x - dst.x
+	val dY = src.y - dst.y
+	val dZ = src.z + +player.viewOffset - dst.z
+
+	val hyp = sqrt(dX.toDouble() * dX + dY.toDouble() * dY)
+
+	angles.x = (atan(dZ / hyp) * (180 / PI) - myPunch.x * pitchReduction).toFloat()
+	angles.y = (atan(dY.toDouble() / dX) * (180 / PI) - myPunch.y * yawReduction).toFloat()
+	angles.z = 0F
+	if (dX >= 0) angles.y += 180
+
+	return angles
 }
 
 fun calculateAngle(player: Player, src: Vector, dst: Vector, angles: Vector): Vector {

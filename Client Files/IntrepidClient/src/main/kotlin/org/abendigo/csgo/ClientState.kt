@@ -36,7 +36,7 @@ class ClientState(override val address: Int) : Addressable {
 		}
 	}
 
-	private fun silentAngle(angle: Vector) {
+	fun silentAngle(angle: Vector, orig: Vector) {
 		try {
 			val weapon = +Me().weapon
 			if (!weapon.canFire()) return
@@ -50,12 +50,12 @@ class ClientState(override val address: Int) : Addressable {
 				desiredTick += 1
 				val userCMD = userCMDBase + ((desiredTick % 150) * 0x64) // future usercmd
 
-				var previousAngle = Vector(0F, 0F, 0F)
+				var previousAngle = orig
 
 
 				var tick = 0
 				while (tick != desiredTick) {
-					previousAngle = angle()
+					previousAngle = orig
 					tick = csgo[userCMD + 0x4]
 				}
 
