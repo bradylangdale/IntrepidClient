@@ -68,7 +68,7 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
 			if (+Me().dead) return false
 			if (+e.dead || !+e.spotted || +e.dormant) continue
 
-			val ePos = e!!.bonePosition(Bones.HEAD.id)
+			val ePos = e.bonePosition(Bones.HEAD.id)
 			val distance = distance(position, ePos)
 
 			calculateAngle(Me(), position, ePos, aim.reset())
@@ -93,11 +93,11 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 20) {
 
 	private fun aimAt(position: Vector, angle: Vector, target: Player, unlockFOV: Float) {
 	
-		val enemyPosition = target!!.bonePosition(targetBone.id)
+		val enemyPosition = target.bonePosition(targetBone.id)
 
 		val smoothing = 100F
 
-		compensateVelocity(Me(), target!!, enemyPosition, smoothing)
+		compensateVelocity(Me(), target, enemyPosition, smoothing)
 
 		calculateAngle(Me(), position, enemyPosition, aim.reset())
 		normalizeAngle(aim)

@@ -1,4 +1,3 @@
-
 package org.abendigo.plugin.csgo
 
 import org.abendigo.DEBUG
@@ -110,11 +109,11 @@ object LegitAimPlugin : InGamePlugin(name = "Aim Assist Legit", duration = 25) {
 
 		if (random(CHANGE_BONE_CHANCE) == 1) targetBone = newTargetBone()
 
-		val enemyPosition = target!!.bonePosition(targetBone.id)
+		val enemyPosition = target.bonePosition(targetBone.id)
 
 		val smoothing = 10f
 
-		compensateVelocity(Me(), target!!, enemyPosition, smoothing)
+		compensateVelocity(Me(), target, enemyPosition, smoothing)
 
 		calculateAngle(Me(), position, enemyPosition, aim.reset())
 		normalizeAngle(aim)
