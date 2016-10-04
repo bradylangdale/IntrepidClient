@@ -18,7 +18,7 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 16) {
 
 	private const val AIM_KEY = 1
 
-	private const val LOCK_FOV = 30
+	private const val LOCK_FOV = 50
 	private const val UNLOCK_FOV = LOCK_FOV * 2
 
 	private var target: Player? = null
@@ -53,11 +53,13 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 16) {
 	}
 
 	private fun findTarget(position: Vector, angle: Vector, lockFOV: Float): Boolean {
+	
 		var closestDelta = Int.MAX_VALUE
 		var closetPlayer: Player? = null
+		
 		for ((i, e) in enemies) {
 			if (+Me().dead) return false
-			if (!+e.dead) continue
+			if (+e.dead || !+e.spotted || +e.dormant) continue
 
 			val ePos = e.bonePosition(Bones.HEAD.id)
 			val distance = distance(position, ePos)
