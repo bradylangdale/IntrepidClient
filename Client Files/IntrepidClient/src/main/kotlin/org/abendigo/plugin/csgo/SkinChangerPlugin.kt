@@ -19,49 +19,49 @@ object SkinChangerPlugin : InGamePlugin("Skin Changer", duration = 1) {
 	private const val APPLY_KEY = KeyEvent.VK_F1
 
 	private const val DEFAULT_SKIN_SEED = 0
-	private const val DEFAULT_STATTRAK = -1 // -1 for no StatTrak, 0+ for StatTrak amount
+	private const val DEFAULT_STATTRAK = 1337 // -1 for no StatTrak, 0+ for StatTrak amount
 	private const val DEFAULT_WEAR = 0.0001F // lower = less wear, higher = more wear
-	private const val DEFAULT_QUALITY = 1
+	private const val DEFAULT_QUALITY = 0
 
 	// state so that Weapons.invoke can infer
 	private var weaponAddress = 0
 	private lateinit var weapon: Weapons
 
 	private fun skins() {
-		Weapons.AK47(302, 0, 100)
-		Weapons.AUG(197)
-		Weapons.AWP(344, 0, 268)
-		Weapons.CZ75A(350)
-		Weapons.DESERT_EAGLE(328)
-		Weapons.FAMAS(194)
-		Weapons.FIVE_SEVEN(427)
-		Weapons.G3SG1(511)
-		Weapons.GALIL(398)
-		Weapons.GLOCK(38)
-		Weapons.M249(496)
-		Weapons.M4A1_SILENCER(440, 0, 1057)
-		Weapons.M4A4(449, 0, 104)
-		Weapons.MAC10(433)
-		Weapons.MAG7(431)
-		Weapons.MP7(536)
-		Weapons.MP9(262)
-		Weapons.NEGEV(317)
-		Weapons.NOVA(286, 0, 2049)
-		Weapons.P2000(389)
-		Weapons.P250(404)
-		Weapons.P90(156)
-		Weapons.PP_BIZON(542)
-		Weapons.R8_REVOLVER(595)
-		Weapons.SAWED_OFF(256)
-		Weapons.SCAR20(391)
-		Weapons.SSG08(222)
-		Weapons.SG556(487)
-		Weapons.TEC9(555)
-		Weapons.UMP45(556)
-		Weapons.USP_SILENCER(339, 0, 2679)
-		Weapons.XM1014(393)
-		Weapons.KNIFE_T(38)
-		Weapons.KNIFE(38)
+		Weapons.AK47(418, 0, 100)
+		Weapons.AUG(418)
+		Weapons.AWP(418, 0, 268)
+		Weapons.CZ75A(418)
+		Weapons.DESERT_EAGLE(418)
+		Weapons.FAMAS(418)
+		Weapons.FIVE_SEVEN(418)
+		Weapons.G3SG1(418)
+		Weapons.GALIL(418)
+		Weapons.GLOCK(418)
+		Weapons.M249(418)
+		Weapons.M4A1_SILENCER(418, 0, 1057)
+		Weapons.M4A4(418, 0, 104)
+		Weapons.MAC10(418)
+		Weapons.MAG7(418)
+		Weapons.MP7(418)
+		Weapons.MP9(418)
+		Weapons.NEGEV(418)
+		Weapons.NOVA(418, 0, 2049)
+		Weapons.P2000(418)
+		Weapons.P250(418)
+		Weapons.P90(418)
+		Weapons.PP_BIZON(418)
+		Weapons.R8_REVOLVER(418)
+		Weapons.SAWED_OFF(418)
+		Weapons.SCAR20(418)
+		Weapons.SSG08(418)
+		Weapons.SG556(418)
+		Weapons.TEC9(418)
+		Weapons.UMP45(418)
+		Weapons.USP_SILENCER(418, 0, 2679)
+		Weapons.XM1014(418)
+		Weapons.KNIFE_T(418)
+		Weapons.KNIFE(418)
 	}
 
 	override fun cycle() {

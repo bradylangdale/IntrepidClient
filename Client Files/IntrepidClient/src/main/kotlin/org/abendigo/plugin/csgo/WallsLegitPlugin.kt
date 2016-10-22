@@ -18,8 +18,8 @@ object WallsLegitPlugin : InGamePlugin("Walls Legit", duration = 4) {
 	private const val SHOW_DORMANT = false
 
 	private const val SHOW_BOMB = true
-	private const val SHOW_WEAPONS = true
-	private const val SHOW_GRENADES = true
+	private const val SHOW_WEAPONS = false
+	private const val SHOW_GRENADES = false
 	private const val SHOW_CHICKENS = true
 
 	private const val CHANGE_MODEL_COLORS = true
@@ -95,6 +95,7 @@ object WallsLegitPlugin : InGamePlugin("Walls Legit", duration = 4) {
 		csgo[glowAddress + 0x24] = occluded
 		csgo[glowAddress + 0x25] = unoccluded
 		csgo[glowAddress + 0x26] = fullBloom
+		csgo[glowAddress + 0x2C] = true
 	}
 
 	private fun modelColors(entityAddress: Int, red: Byte, green: Byte, blue: Byte, alpha: Byte = 255.toByte()) {

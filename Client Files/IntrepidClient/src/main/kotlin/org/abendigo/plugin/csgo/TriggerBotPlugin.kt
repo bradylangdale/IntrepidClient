@@ -22,7 +22,7 @@ object TriggerBotPlugin : InGamePlugin("Trigger Bot", duration = 1) {
 			
 			if (e.address == +Me.targetAddress) {
 				clientDLL[m_dwForceAttack] = 5.toByte()
-				sleep(8)
+				sleep(10)
 				clientDLL[m_dwForceAttack] = 4.toByte()
 			}
 			

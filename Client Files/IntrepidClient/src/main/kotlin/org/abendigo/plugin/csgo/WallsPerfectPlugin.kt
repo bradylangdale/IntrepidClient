@@ -19,7 +19,7 @@ object WallsPerfectPlugin : InGamePlugin("Walls Full", duration = 4) {
 
 	private const val SHOW_BOMB = true
 	private const val SHOW_WEAPONS = true
-	private const val SHOW_GRENADES = true
+	private const val SHOW_GRENADES = false
 	private const val SHOW_CHICKENS = true
 
 	private const val CHANGE_MODEL_COLORS = true
@@ -87,11 +87,11 @@ object WallsPerfectPlugin : InGamePlugin("Walls Full", duration = 4) {
 	}
 
 	private fun glow(glowAddress: Int, red: Int, green: Int, blue: Int, alpha: Float = 1F,
-	                 occluded: Boolean = true, unoccluded: Boolean = false, fullBloom: Boolean = false) {
+	                 occluded: Boolean = false, unoccluded: Boolean = true, fullBloom: Boolean = false) {
 		csgo[glowAddress + 0x4] = red / 255F
 		csgo[glowAddress + 0x8] = green / 255F
 		csgo[glowAddress + 0xC] = blue / 255F
-		csgo[glowAddress + 0x10] = alpha
+		csgo[glowAddress + 0x10] = 1f
 		csgo[glowAddress + 0x24] = occluded
 		csgo[glowAddress + 0x25] = unoccluded
 		csgo[glowAddress + 0x26] = fullBloom

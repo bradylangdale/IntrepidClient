@@ -9,6 +9,7 @@ import org.abendigo.csgo.offsets.m_dwInput
 import org.abendigo.csgo.offsets.m_dwViewAngles
 import org.abendigo.util.mouseMove
 import org.jire.arrowhead.get
+import org.abendigo.plugin.sleep
 
 class ClientState(override val address: Int) : Addressable {
 
@@ -36,7 +37,20 @@ class ClientState(override val address: Int) : Addressable {
 		}
 	}
 
-	fun silentAngle(angle: Vector, orig: Vector) {
+	fun angleFlick(angle: Vector, orig: Vector, time: Int) {
+		if (angle.z != 0F || angle.x < -89 || angle.x > 180 || angle.y < -180 || angle.y > 180
+		|| angle.x.isNaN() || angle.y.isNaN() || angle.z.isNaN()) return
+
+		csgo[address + m_dwViewAngles] = angle.x // pitch (up and down)
+		csgo[address + m_dwViewAngles + 4] = angle.y // yaw (side to side))
+		
+		sleep(time)
+		
+		csgo[address + m_dwViewAngles] = orig.x // pitch (up and down)
+		csgo[address + m_dwViewAngles + 4] = orig.y // yaw (side to side))
+	}
+	
+		fun silentAngle(angle: Vector, orig: Vector) {
 		try {
 			val weapon = +Me().weapon
 			if (!weapon.canFire()) return
@@ -63,7 +77,6 @@ class ClientState(override val address: Int) : Addressable {
 					csgo[userCMD + 0xC] = angle.x
 					csgo[userCMD + 0xC + 4] = angle.y
 				}
-
 				angle(previousAngle)
 			}
 
