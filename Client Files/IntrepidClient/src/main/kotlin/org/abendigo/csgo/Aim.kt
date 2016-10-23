@@ -158,10 +158,6 @@ fun calculateAngle(player: Player, src: Vector, dst: Vector, angles: Vector): Ve
 	return angles
 }
 
-fun distance(a: Vector, b: Vector) : Float {
-	val x = (a.x*a.x - b.x*b.x).toDouble()
- 	val y = (a.y*a.y - b.y*b.y).toDouble()
- 	val z =	(a.z*a.z - b.z*b.z).toDouble()
-	
- 	return (sqrt(x + y + z)).toFloat()
+fun distance(p1: Vector, p2: Vector) : Float {
+	return (sqrt((((p1.x*p1.x)+(p2.x*p2.x))+((p1.y*p1.y)+(p2.y*p2.y))+((p1.z*p1.z)+(p2.z*p2.z))).toDouble())).toFloat()
  }

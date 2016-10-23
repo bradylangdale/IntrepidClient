@@ -19,7 +19,7 @@ object ClickAimPlugin : InGamePlugin(name = "Click Aim", duration = 16) {
 
 	private const val AIM_KEY = 1
 
-	private const val LOCK_FOV = 55
+	private const val LOCK_FOV = 50
 	private const val UNLOCK_FOV = LOCK_FOV * 2
 
 	private var target: Player? = null

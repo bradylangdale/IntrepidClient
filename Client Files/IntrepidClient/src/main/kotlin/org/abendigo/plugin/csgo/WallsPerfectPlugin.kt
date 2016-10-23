@@ -87,7 +87,7 @@ object WallsPerfectPlugin : InGamePlugin("Walls Full", duration = 4) {
 	}
 
 	private fun glow(glowAddress: Int, red: Int, green: Int, blue: Int, alpha: Float = 1F,
-	                 occluded: Boolean = false, unoccluded: Boolean = true, fullBloom: Boolean = false) {
+	                 occluded: Boolean = true, unoccluded: Boolean = false, fullBloom: Boolean = false) {
 		csgo[glowAddress + 0x4] = red / 255F
 		csgo[glowAddress + 0x8] = green / 255F
 		csgo[glowAddress + 0xC] = blue / 255F
