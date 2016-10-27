@@ -12,7 +12,7 @@ import kotlin.collections.Set
 import kotlin.collections.MutableSet
 import org.abendigo.plugin.sleep
 
-object AutoAimPlugin : InGamePlugin(name = "Auto Aim", duration = 8) {	
+object AutoAimPlugin : InGamePlugin(name = "Auto Aim", duration = 6) {	
 
 	override val author = "Intrepidus"
 	override val description = "If Neo Hacked He'd Use This"
@@ -30,17 +30,17 @@ object AutoAimPlugin : InGamePlugin(name = "Auto Aim", duration = 8) {
 		}
 
 		val position = +Me().position
-		var distanced_e: MutableMap<Double, Int?> = HashMap()
+		var distanced_e: MutableMap<Float, Int?> = HashMap()
 		
 		for ((i,e) in enemies)
 		{	
 			if(!+e.dead)
 			{	
-				distanced_e.put((Distance(position, e.bonePosition(Bones.UPPER_CHEST.id))), i)
+				distanced_e.put((distance(position, e.bonePosition(Bones.UPPER_CHEST.id))), i)
 			}
 		}
 		
-		var dist: MutableSet<Double> = (distanced_e.keys).toMutableSet()
+		var dist: MutableSet<Float> = (distanced_e.keys).toMutableSet()
 		dist = (dist.sorted()).toMutableSet()
 		var _e: MutableSet<Int?> = mutableSetOf()
 		
@@ -67,31 +67,10 @@ object AutoAimPlugin : InGamePlugin(name = "Auto Aim", duration = 8) {
 		dist.clear()
 		_e.clear()
 	}
-	
-	private fun Distance(p1: Vector, p2: Vector) : Double
-	{
-		return (sqrt((((p1.x*p1.x)+(p2.x*p2.x))+((p1.y*p1.y)+(p2.y*p2.y))+((p1.z*p1.z)+(p2.z*p2.z))).toDouble()))
-	}
-	
-	private fun aimSilent(position: Vector, angle: Vector, target: Player) {
-
-		val enemyPosition = target.bonePosition(Bones.HEAD.id)
-
-		compensateVelocityRage(Me(), target, enemyPosition)
-
-		calculateAngleRage(Me(), position, enemyPosition, aim.reset())
-		normalizeAngle(aim)
-
-		normalizeAngle(angle)
-
-		angleInstantSilent(aim, angle)
-	}
 
 	private fun aimAt(position: Vector, angle: Vector, target: Player) {
 
 		val enemyPosition = target.bonePosition(Bones.HEAD.id)
-
-		compensateVelocityRage(Me(), target, enemyPosition)
 
 		calculateAngleRage(Me(), position, enemyPosition, aim.reset())
 		normalizeAngle(aim)
