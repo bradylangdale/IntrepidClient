@@ -36,7 +36,7 @@ object AutoAimPlugin : InGamePlugin(name = "Auto Aim", duration = 6) {
 		{	
 			if(!+e.dead)
 			{	
-				distanced_e.put((distance(position, e.bonePosition(Bones.UPPER_CHEST.id))), i)
+				distanced_e.put((distance(position, e.bonePosition(Bones.HEAD.id))), i)
 			}
 		}
 		
